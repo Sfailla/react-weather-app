@@ -1,0 +1,32 @@
+.weather-box {
+	max-width: 115rem;
+	height: 60rem;
+	margin: 0 auto;
+	border-radius: 1rem;
+	border: 2px solid $color-neon-yellow;
+	background: {
+		image: url('/../../../img/weather-bg-code-new.png');
+		repeat: no-repeat;
+		size: cover;
+	}
+
+	&__container {
+		padding: 3rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__loading {
+		color: $color-black;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	&__location {
+		margin: 4.5rem 0;
+		text-align: center;
+		color: $color-neon-yellow;
+		font-size: 3.5rem;
+	}
+}

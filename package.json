@@ -1,0 +1,33 @@
+{
+	"name": "boilerplate",
+	"version": "1.0.0",
+	"main": "app.js",
+	"license": "MIT",
+	"author": "Steve Failla",
+	"scripts": {
+		"start": "start http://localhost:8080/ & webpack-dev-server --config ./webpack.config.js --mode development",
+		"build": "webpack -p",
+		"dev-server": "start http://localhost:8080/ & webpack-dev-server --config ./webpack.config.js --mode development"
+	},
+	"dependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.2",
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-react": "^6.24.1",
+		"css-loader": "^0.28.7",
+		"node-sass": "^4.7.2",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-modal": "^3.1.10",
+		"react-router-dom": "^4.2.2",
+		"sass-loader": "^6.0.6",
+		"style-loader": "^0.19.1",
+		"validator": "^9.2.0",
+		"webpack": "^4.20.2",
+		"webpack-cli": "^3.1.2",
+		"webpack-dev-server": "^3.1.9"
+	},
+	"devDependencies": {}
+}
