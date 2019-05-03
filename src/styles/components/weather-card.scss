@@ -1,41 +1,52 @@
 .card {
-    width: 18rem;
-    height: 30rem;
-    background-color: $color-dark-blue; 
-    color: $color-orange; 
-    border-radius: 7px; 
-    border: 2px solid $color-orange; // maybe remove this??
-    text-align: center;
-    transition: all .15s ease-in-out;
+	width: 18rem;
+	height: 30rem;
+	background-color: $color-dark-blue;
+	color: $color-orange;
+	border-radius: 7px;
+	border: 2px solid $color-orange; // maybe remove this??
+	text-align: center;
+	transition: all .15s ease-in-out;
 
-    &:hover {
-        transform: scale(1.06);
-    }
+	@media (max-width: 62.5em) {
+		width: 100%;
+		max-width: 35rem;
+	}
 
-    &__container {
-        padding: 2rem 1rem;
-        height: 100%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-direction: column;
-    } 
+	&:not(:last-of-type) {
+		margin-bottom: 2rem;
+	}
 
-    &__day {
-        font-size: 2.4rem;
-    }
+	&:hover {
+		transform: scale(1.06);
+	}
 
-    &__icon {
-        width: 100%;
-    }
+	&__container {
+		padding: 2rem 1rem;
+		height: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-direction: column;
+	}
 
-    &__icon--cloud {
-        width: 5rem;
-        height: 5rem;
-        fill: grey;
-    }
+	&__day {
+		font-size: 2.4rem;
+	}
 
-    &__temp {}
+	&__icon {
+		width: 100%;
+	}
 
-    &__description {}
+	&__icon--cloud {
+		width: 5rem;
+		height: 5rem;
+		fill: grey;
+	}
+
+	&__temp {
+	}
+
+	&__description {
+	}
 }

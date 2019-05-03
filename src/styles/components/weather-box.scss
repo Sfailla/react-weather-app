@@ -1,6 +1,6 @@
 .weather-box {
 	max-width: 115rem;
-	height: 60rem;
+	min-height: 60rem;
 	margin: 0 auto;
 	border-radius: 1rem;
 	border: 2px solid $color-neon-yellow;
@@ -11,10 +11,15 @@
 	}
 
 	&__container {
-		padding: 3rem;
+		padding: 3rem 5rem;
 		display: flex;
+		// flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
+
+		@media (max-width: 62.5em) {
+			flex-direction: column;
+		}
 	}
 
 	&__loading {

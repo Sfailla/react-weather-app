@@ -1,56 +1,57 @@
 .input {
-    margin-top: 6rem;    
-    color: $color-white;
-    text-align: center;
-    line-height: 2;
+	margin-top: 6rem;
+	color: $color-white;
+	text-align: center;
+	line-height: 2;
 
-    &__container {
-        width: 40rem;
-        margin: 0 auto;
-        position: relative;
-    }
+	&__container {
+		width: 40rem;
+		margin: 0 auto;
+		position: relative;
+	}
 
-    &__label {
-        display: block;
-        color: $color-orange;
-        font-size: 2rem;
-    }
+	&__label {
+		display: block;
+		color: $color-orange;
+		font-size: 1.6rem;
+	}
 
-    &__form {
-        padding-bottom: 10rem;
-    }
+	&__form {
+		padding-bottom: 10rem;
+	}
 
-    &__search-box {
-        width: 40rem;
-        height: 3.5rem;
-        font-size: 1.6rem;
-        margin: 3rem 1rem 0 0;
-        padding-left: 1rem;
-        border-radius: 10rem;
-        outline: none;
-    }
+	&__search-box {
+		width: 40rem;
+		height: 3.5rem;
+		font-size: 1.6rem;
+		margin: 3rem 1rem 0 0;
+		padding-left: 1rem;
+		border-radius: 10rem;
+		font-weight: bold;
+		outline: none;
+	}
 
-    &__search-icon {
-        width: 3.5rem;
-        height: 3.5rem;
-        fill: $color-orange;
-    }
+	&__search-icon {
+		width: 3.5rem;
+		height: 3.5rem;
+		fill: $color-orange;
+	}
 
-    &__submit-button {
-        background: transparent;
-        outline: none;
-        border: none;
-        position: absolute;
-        top: 3.2rem;
-        right: -5rem;
-        cursor: pointer;
-    }
+	&__submit-button {
+		background: transparent;
+		outline: none;
+		border: none;
+		position: absolute;
+		top: 3.2rem;
+		right: -5rem;
+		cursor: pointer;
+	}
 
-    &__search-text {
-        font-size: 2.6rem;
-    }
+	&__search-text {
+		font-size: 1.8rem;
+	}
 
-    &__span {
-        color: $color-magenta;
-    }
+	&__span {
+		color: $color-magenta;
+	}
 }
