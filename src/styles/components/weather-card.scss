@@ -11,10 +11,11 @@
 	@media (max-width: 62.5em) {
 		width: 100%;
 		max-width: 35rem;
+		margin-bottom: 2rem;
 	}
 
 	&:not(:last-of-type) {
-		margin-bottom: 2rem;
+		margin-right: 2rem;
 	}
 
 	&:hover {

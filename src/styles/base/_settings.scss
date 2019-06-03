@@ -1,19 +1,16 @@
 // COLORS VARIABLES
-$color-neon-yellow: #E2F734;
-$color-orange: #FFA500;
+$color-neon-yellow: #e2f734;
+$color-orange: #ffa500;
 $color-dark-blue: #011627;
 $color-dark-grey: #35383b;
-$color-magenta: #FF00FF;
+$color-magenta: #ff00ff;
 
-$color-white: #FFFFFF;
+$color-white: #ffffff;
 $color-black: #000000;
 
-
-// Mixins 
+// Mixins
 @mixin flex-center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
-

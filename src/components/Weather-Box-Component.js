@@ -110,7 +110,6 @@ export default class MainBoxComponent extends Component {
 
 		return (
 			<div>
-				<InputComponent onUpdate={this.handleOnUpdate} />
 				<div className="weather-box">
 					<h1 className="weather-box__location">
 						{location}, {region}
@@ -119,6 +118,7 @@ export default class MainBoxComponent extends Component {
 						{dailyForecast}
 					</div>
 				</div>
+				<InputComponent onUpdate={this.handleOnUpdate} />
 			</div>
 		);
 	}
