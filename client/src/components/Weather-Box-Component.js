@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import api from '../../../key/key.json';
+import api from '../../key/key.json';
 import WeatherCard from './weatherCard-Component';
 import InputComponent from './Input-Component';
 
