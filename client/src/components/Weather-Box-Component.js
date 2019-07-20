@@ -4,6 +4,8 @@ import api from '../../key/key';
 import WeatherCard from './WeatherCard-Component';
 import InputComponent from './Input-Component';
 
+// must change all url's to http when in development
+
 export default class MainBoxComponent extends Component {
 	state = {
 		url: `https://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=10562,us`,
