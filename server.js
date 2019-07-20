@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, './client')));
 
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client'));
+}
+
 app.get('/*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../client/index.html'), err => {
 		if (err) res.status(500).send(err);
