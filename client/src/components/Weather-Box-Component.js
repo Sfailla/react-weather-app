@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import api from '../../key/key.json';
-import WeatherCard from './weatherCard-Component';
+import api from '../../key/key';
+import WeatherCard from './WeatherCard-Component';
 import InputComponent from './Input-Component';
 
 export default class MainBoxComponent extends Component {

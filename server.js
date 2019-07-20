@@ -1,32 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const cors = require('cors');
-const helmet = require('helmet');
+var path = require('path');
+var express = require('express');
 
-const app = express();
+var CLIENT_DIR = path.join(__dirname, 'client');
+var PORT = process.env.PORT || 3000;
+var app = express();
 
-app.use(helmet());
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//Serving the files on the CLIENT folder
+app.use(express.static(CLIENT_DIR));
 
-app.use(express.static(path.join(__dirname, '/client')));
-
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client'));
-
-	app.get('*', (req, res) => {
-		res.sendFile(path.resolve(__dirname, 'client', 'index.html'));
-	});
-}
-
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '/client/index.html'), err => {
-		if (err) res.status(500).send(err);
-	});
+//Send index.html when the user access the web
+app.get('*', function(req, res) {
+	res.sendFile(path.join(CLIENT_DIR, 'index.html'));
 });
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => console.log(`express server running on port ${port}`));
+app.listen(PORT);
