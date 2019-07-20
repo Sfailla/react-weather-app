@@ -6,7 +6,7 @@ import InputComponent from './Input-Component';
 
 export default class MainBoxComponent extends Component {
 	state = {
-		url: `http://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=10562,us`,
+		url: `https://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=10562,us`,
 		weather: [],
 		location: 'Ossining',
 		region: 'NY'
