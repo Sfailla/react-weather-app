@@ -27,7 +27,7 @@ export default class MainBoxComponent extends Component {
 	handleGeoLocate = () => {
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState(() => ({
-				url: `http://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=${position.coords
+				url: `https://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=${position.coords
 					.latitude},${position.coords.longitude}`
 			}));
 			fetch(this.state.url)
