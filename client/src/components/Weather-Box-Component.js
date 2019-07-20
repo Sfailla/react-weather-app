@@ -47,7 +47,7 @@ export default class MainBoxComponent extends Component {
 
 	handleOnUpdate = data => {
 		this.setState(() => ({
-			url: `http://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
+			url: `https://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
 				data
 			)}`
 		}));
