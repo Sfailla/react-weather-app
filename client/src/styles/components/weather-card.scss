@@ -14,8 +14,10 @@
 		margin-bottom: 2rem;
 	}
 
-	&:not(:last-of-type) {
-		margin-right: 2rem;
+	@media (min-width: 62.5em) {
+		&:not(:last-of-type) {
+			margin-right: 2rem;
+		}
 	}
 
 	&:hover {
