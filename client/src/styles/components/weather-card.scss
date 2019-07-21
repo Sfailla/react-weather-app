@@ -10,14 +10,18 @@
 
 	@media (max-width: 62.5em) {
 		width: 100%;
-		max-width: 35rem;
-		margin-bottom: 2rem;
+		height: 8rem;
+		margin-bottom: 1rem;
 	}
 
 	@media (min-width: 62.5em) {
 		&:not(:last-of-type) {
 			margin-right: 2rem;
 		}
+	}
+
+	@media (max-width: 31.25em) {
+		height: 9rem;
 	}
 
 	&:hover {
@@ -30,26 +34,41 @@
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		flex-direction: column;
+
+		@media (min-width: 62.5em) {
+			flex-direction: column;
+		}
 	}
 
 	&__day {
 		font-size: 2.4rem;
+		@media (max-width: 62.5em) {
+			width: 25%;
+		}
 	}
 
 	&__icon {
 		width: 100%;
+		@media (max-width: 62.5em) {
+			width: 25%;
+		}
+	}
+
+	&__temp {
+		@media (max-width: 62.5em) {
+			width: 25%;
+		}
+	}
+
+	&__description {
+		@media (max-width: 62.5em) {
+			width: 25%;
+		}
 	}
 
 	&__icon--cloud {
 		width: 5rem;
 		height: 5rem;
 		fill: grey;
-	}
-
-	&__temp {
-	}
-
-	&__description {
 	}
 }
