@@ -40,5 +40,7 @@
 		"webpack-cli": "^3.1.2",
 		"webpack-dev-server": "^3.1.9"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"concurrently": "^4.1.1"
+	}
 }
