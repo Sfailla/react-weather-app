@@ -55,10 +55,10 @@ export default class MainBoxComponent extends Component {
 				lat: position.coords.latitude,
 				lon: position.coords.longitude
 			}));
+
 			fetch(this.state.url)
 				.then(res => res.json())
 				.then(data => {
-					console.log(data);
 					let weather = data.forecast.forecastday;
 					let location =
 						data.location.name !== ''
@@ -88,9 +88,6 @@ export default class MainBoxComponent extends Component {
 			fetch(this.state.url)
 				.then(res => res.json())
 				.then(data => {
-					console.log('--', data.location.name);
-					console.log('--', data.location.region);
-					console.log(data);
 					let weather = data.forecast.forecastday;
 					let location = data.location.name;
 					let region =
