@@ -18,8 +18,6 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-console.log(__dirname);
-
 //Send index.html when the user access the web
 app.get('*', function(req, res) {
 	res.sendFile(path.join(CLIENT_DIR, 'index.html'));
