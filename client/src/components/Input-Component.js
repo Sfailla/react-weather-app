@@ -6,7 +6,7 @@ export default class InputComponent extends Component {
 	};
 
 	handleOnChange = event => {
-		let value = event.target.value;
+		let value = event.target.value.trim();
 		this.setState(() => ({ value }));
 	};
 
@@ -25,7 +25,8 @@ export default class InputComponent extends Component {
 					<p className="input__search-text">
 						To get the forcast in a different area, enter{' '}
 						<span className="input__span">City</span> or{' '}
-						<span className="input__span">Zip</span> in search area below
+						<span className="input__span">Zip</span> in search area
+						below
 					</p>
 					<label
 						className="input__label"
@@ -35,7 +36,10 @@ export default class InputComponent extends Component {
 						Enter City or Zip
 					</label>
 					<div className="input__container">
-						<form className="input__form" onSubmit={this.handleOnSubmit}>
+						<form
+							className="input__form"
+							onSubmit={this.handleOnSubmit}
+						>
 							<input
 								onChange={this.handleOnChange}
 								className="input__search-box"

@@ -11,7 +11,8 @@ export default class MainBoxComponent extends Component {
 		url: `https://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=10562,us`,
 		weather: [],
 		location: 'Ossining',
-		region: 'NY'
+		region: 'NY',
+		error: null
 	};
 
 	handleUnixToDayOfWeek = timeStamp => {
@@ -78,27 +79,29 @@ export default class MainBoxComponent extends Component {
 		});
 	};
 
-	handleOnUpdate = data => {
-		this.setState(() => ({
-			url: `https://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
-				data
-			)}`
-		}));
-		setTimeout(() => {
-			fetch(this.state.url)
-				.then(res => res.json())
-				.then(data => {
-					let weather = data.forecast.forecastday;
-					let location = data.location.name;
-					let region =
-						data.location.region === '' ||
-						data.location.region === data.location.name
-							? data.location.country
-							: data.location.region;
-					this.setState(() => ({ weather, location, region }));
-				})
-				.catch(err => console.log(err));
-		}, 300);
+	passResponse = data => {
+		let weather = data.forecast.forecastday;
+		let location = data.location.name;
+		let region =
+			data.location.region === '' ||
+			data.location.region === data.location.name
+				? data.location.country
+				: data.location.region;
+		this.setState(() => ({ weather, location, region }));
+	};
+
+	failResponse = data => {
+		let error = data.error.message;
+		this.setState({ error });
+	};
+
+	handleOnUpdate = async res => {
+		let response = await fetch(`
+			https://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
+			res
+		)}`);
+		let data = await response.json().catch(err => console.log(err));
+		data.error ? this.failResponse(data) : this.passResponse(data);
 	};
 
 	componentDidMount = () => {
@@ -122,9 +125,7 @@ export default class MainBoxComponent extends Component {
 					);
 				})
 			) : (
-				<h1 className="weather-box__loading">
-					Loading Weather Data...
-				</h1>
+				<h1 className="weather-box__loading">LOADING...</h1>
 			);
 
 		return (
@@ -137,7 +138,10 @@ export default class MainBoxComponent extends Component {
 						{dailyForecast}
 					</div>
 				</div>
-				<InputComponent onUpdate={this.handleOnUpdate} />
+				<InputComponent
+					error={this.state.error}
+					onUpdate={this.handleOnUpdate}
+				/>
 			</div>
 		);
 	}
