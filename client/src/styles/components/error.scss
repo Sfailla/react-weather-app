@@ -1,0 +1,36 @@
+.error {
+	transition: all 1s ease-in-out;
+	padding: 0 2rem;
+
+	&__container {
+		width: 50%;
+		height: auto;
+		position: relative;
+		background: $color-dark-blue;
+		border: 2px solid $color-orange;
+		margin: 2rem auto 4rem auto;
+		@include flex-center(center, center);
+
+		@media (max-width: 43.75em) {
+			width: 100%;
+		}
+	}
+
+	&__message {
+		padding: 2rem 1rem;
+		color: red;
+	}
+
+	&__button {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		cursor: pointer;
+
+		height: 22px;
+		width: 22px;
+		& svg {
+			fill: white;
+		}
+	}
+}
