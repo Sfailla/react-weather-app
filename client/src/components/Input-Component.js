@@ -12,7 +12,7 @@ export default class InputComponent extends Component {
 
 	handleOnSubmit = e => {
 		e.preventDefault();
-		this.props.onUpdate(this.state.value);
+		this.props.onSearch(this.state.value);
 		this.state.value = '';
 	};
 

@@ -9,8 +9,8 @@ $color-white: #ffffff;
 $color-black: #000000;
 
 // Mixins
-@mixin flex-center {
+@mixin flex-center($justify, $align) {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	justify-content: $justify;
+	align-items: $align;
 }

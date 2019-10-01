@@ -4,66 +4,59 @@
 	background-color: $color-dark-blue;
 	color: $color-orange;
 	border-radius: 7px;
-	border: 2px solid $color-orange; // maybe remove this??
+	border: 2px solid $color-orange;
 	text-align: center;
-	transition: all .15s ease-in-out;
+	transition: transform .3s ease;
 
 	@media (max-width: 62.5em) {
 		width: 100%;
-		height: 8rem;
-		margin-bottom: 1rem;
+		height: 9rem;
+		&:not(:last-of-type) {
+			margin-bottom: 15px;
+		}
 	}
 
 	@media (min-width: 62.5em) {
 		&:not(:last-of-type) {
-			margin-right: 2rem;
+			margin-right: 20px;
 		}
-	}
-
-	@media (max-width: 31.25em) {
-		height: 9rem;
 	}
 
 	&:hover {
 		transform: scale(1.06);
+		@media (max-width: 62.56em) {
+			transform: scale(1.02);
+		}
 	}
 
 	&__container {
-		padding: 2rem 1rem;
+		padding: 20px 10px;
 		height: 100%;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+		flex-direction: column;
 
-		@media (min-width: 62.5em) {
-			flex-direction: column;
+		@media (max-width: 62.5em) {
+			flex-direction: row;
+		}
+	}
+
+	&__day,
+	&__icon,
+	&__temp,
+	&__description {
+		@media (max-width: 62.5em) {
+			width: 25%;
 		}
 	}
 
 	&__day {
 		font-size: 2.4rem;
-		@media (max-width: 62.5em) {
-			width: 25%;
-		}
 	}
 
 	&__icon {
 		width: 100%;
-		@media (max-width: 62.5em) {
-			width: 25%;
-		}
-	}
-
-	&__temp {
-		@media (max-width: 62.5em) {
-			width: 25%;
-		}
-	}
-
-	&__description {
-		@media (max-width: 62.5em) {
-			width: 25%;
-		}
 	}
 
 	&__icon--cloud {

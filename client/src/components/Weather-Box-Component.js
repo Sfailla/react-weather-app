@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import api from '../../key/key';
 import WeatherCard from './WeatherCard-Component';
 import InputComponent from './Input-Component';
+import ErrorComponent from './ErrorComponent';
 
 // must change all url's to http when in development
 
@@ -35,7 +36,7 @@ export default class MainBoxComponent extends Component {
 		fetch(url)
 			.then(res => res.json())
 			.then(data => data)
-			.catch(error => console.log(error));
+			.catch(error => console.error(error));
 	};
 
 	handleReverseGeoLocate = (lat, lon) => {
@@ -75,7 +76,7 @@ export default class MainBoxComponent extends Component {
 							: data.location.region;
 					this.setState(() => ({ weather, location, region }));
 				})
-				.catch(err => console.log(err));
+				.catch(err => console.error(err));
 		});
 	};
 
@@ -95,13 +96,17 @@ export default class MainBoxComponent extends Component {
 		this.setState({ error });
 	};
 
-	handleOnUpdate = async res => {
+	handleOnSearch = async res => {
 		let response = await fetch(`
 			https://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
 			res
 		)}`);
-		let data = await response.json().catch(err => console.log(err));
+		let data = await response.json().catch(err => console.error(err));
 		data.error ? this.failResponse(data) : this.passResponse(data);
+	};
+
+	handleCloseErrorMessage = () => {
+		this.setState({ error: null });
 	};
 
 	componentDidMount = () => {
@@ -132,15 +137,21 @@ export default class MainBoxComponent extends Component {
 			<div>
 				<div className="weather-box">
 					<h1 className="weather-box__location">
-						{location}, {region}
+						{location} {region}
 					</h1>
 					<div className="weather-box__container container">
 						{dailyForecast}
 					</div>
+					<div className="error">
+						<ErrorComponent
+							error={this.state.error}
+							handleClose={this.handleCloseErrorMessage}
+						/>
+					</div>
 				</div>
 				<InputComponent
 					error={this.state.error}
-					onUpdate={this.handleOnUpdate}
+					onSearch={this.handleOnSearch}
 				/>
 			</div>
 		);
