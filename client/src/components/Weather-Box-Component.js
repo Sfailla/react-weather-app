@@ -31,14 +31,6 @@ export default class MainBoxComponent extends Component {
 		return dayOfWeek;
 	};
 
-	handleGetData = () => {
-		const { url } = this.state;
-		fetch(url)
-			.then(res => res.json())
-			.then(data => data)
-			.catch(error => console.error(error));
-	};
-
 	handleReverseGeoLocate = (lat, lon) => {
 		let key = 'AIzaSyAE3y9x37WZUZrzkhq9rXJF76lrVBpvMqA';
 		let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
@@ -88,7 +80,7 @@ export default class MainBoxComponent extends Component {
 			data.location.region === data.location.name
 				? data.location.country
 				: data.location.region;
-		this.setState(() => ({ weather, location, region }));
+		this.setState(() => ({ weather, location, region, error: null }));
 	};
 
 	failResponse = data => {
@@ -111,7 +103,6 @@ export default class MainBoxComponent extends Component {
 
 	componentDidMount = () => {
 		this.handleGeoLocate();
-		this.handleGetData();
 	};
 
 	render() {

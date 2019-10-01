@@ -6,13 +6,14 @@ export default class InputComponent extends Component {
 	};
 
 	handleOnChange = event => {
-		let value = event.target.value.trim();
+		let value = event.target.value;
 		this.setState(() => ({ value }));
 	};
 
 	handleOnSubmit = e => {
 		e.preventDefault();
-		this.props.onSearch(this.state.value);
+		let trimmedVal = this.state.value.trim();
+		this.props.onSearch(trimmedVal);
 		this.state.value = '';
 	};
 
