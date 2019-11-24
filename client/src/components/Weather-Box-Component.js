@@ -124,13 +124,15 @@ export default class MainBoxComponent extends Component {
 		let dailyForecast =
 			Array.isArray(current) && current.length ? (
 				current.map((data, index) => {
-					console.log(data);
+					let icon = `http://openweathermap.org/img/w/${data
+						.weather[0].icon}.png`;
+					let kelToFarenheit = (data.main.temp - 273.15) * 1.8 + 32;
 					return (
 						<WeatherCard
 							key={index}
 							day={this.handleUnixToDayOfWeek(data.dt)}
-							icon={data.weather[0].icon}
-							temp={data.main.temp.toFixed(0)}
+							icon={icon}
+							temp={kelToFarenheit.toFixed(0)}
 							description={data.weather[0].description}
 						/>
 					);
