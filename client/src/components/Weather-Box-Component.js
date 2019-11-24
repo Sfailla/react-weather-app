@@ -9,7 +9,7 @@ import ErrorComponent from './ErrorComponent';
 
 export default class MainBoxComponent extends Component {
 	state = {
-		url: `https://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=10562,us`,
+		url: `http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=Ossining,us&mode=json`,
 		weather: [],
 		location: 'Ossining',
 		region: 'NY',
@@ -33,7 +33,7 @@ export default class MainBoxComponent extends Component {
 
 	handleReverseGeoLocate = (lat, lon) => {
 		let key = 'AIzaSyAE3y9x37WZUZrzkhq9rXJF76lrVBpvMqA';
-		let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
+		let url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
 		fetch(url).then(res => res.json()).then(data => {
 			let area = data.results[0].formatted_address;
 			let splitArea = area.split(',');
@@ -44,8 +44,8 @@ export default class MainBoxComponent extends Component {
 	handleGeoLocate = () => {
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState(() => ({
-				url: `https://api.apixu.com/v1/forecast.json?key=${api.key}&days=5&q=${position
-					.coords.latitude},${position.coords.longitude}`,
+				url: `http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&lat=${position
+					.coords.latitude}&lon=${position.coords.longitude}`,
 				lat: position.coords.latitude,
 				lon: position.coords.longitude
 			}));
@@ -53,19 +53,24 @@ export default class MainBoxComponent extends Component {
 			fetch(this.state.url)
 				.then(res => res.json())
 				.then(data => {
-					let weather = data.forecast.forecastday;
-					let location =
-						data.location.name !== ''
-							? data.location.name
-							: this.handleReverseGeoLocate(
-									this.state.lat,
-									this.state.lon
-								);
-					let region =
-						data.location.region === '' ||
-						data.location.region === data.location.name
-							? data.location.country
-							: data.location.region;
+					console.log(data);
+
+					let weather = data.list;
+					let location = data.city.name;
+					let region = data.city.country;
+					// let weather = data.list.weather;
+					// let location =
+					// 	data.location.name !== ''
+					// 		? data.location.name
+					// 		: this.handleReverseGeoLocate(
+					// 				this.state.lat,
+					// 				this.state.lon
+					// 			);
+					// let region =
+					// 	data.location.region === '' ||
+					// 	data.location.region === data.location.name
+					// 		? data.location.country
+					// 		: data.location.region;
 					this.setState(() => ({ weather, location, region }));
 				})
 				.catch(err => console.error(err));
@@ -90,7 +95,7 @@ export default class MainBoxComponent extends Component {
 
 	handleOnSearch = async res => {
 		let response = await fetch(`
-			https://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
+			http://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
 			res
 		)}`);
 		let data = await response.json().catch(err => console.error(err));
@@ -105,18 +110,28 @@ export default class MainBoxComponent extends Component {
 		this.handleGeoLocate();
 	};
 
+	handleFormatWeather = weather => {
+		let fiveDayWeather = [];
+		for (let i = 0; i < weather.length; i += 8) {
+			fiveDayWeather.push(weather[i]);
+		}
+		return fiveDayWeather;
+	};
+
 	render() {
 		const { weather, location, region } = this.state;
+		const current = this.handleFormatWeather(weather);
 		let dailyForecast =
-			Array.isArray(weather) && weather.length ? (
-				weather.map((data, index) => {
+			Array.isArray(current) && current.length ? (
+				current.map((data, index) => {
+					console.log(data);
 					return (
 						<WeatherCard
 							key={index}
-							day={this.handleUnixToDayOfWeek(data.date_epoch)}
-							icon={data.day.condition.icon}
-							temp={data.day.avgtemp_f.toFixed(0)}
-							description={data.day.condition.text}
+							day={this.handleUnixToDayOfWeek(data.dt)}
+							icon={data.weather[0].icon}
+							temp={data.main.temp.toFixed(0)}
+							description={data.weather[0].description}
 						/>
 					);
 				})
