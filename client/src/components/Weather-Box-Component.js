@@ -5,8 +5,6 @@ import WeatherCard from './WeatherCard-Component';
 import InputComponent from './Input-Component';
 import ErrorComponent from './ErrorComponent';
 
-// must change all url's to http when in development
-
 export default class MainBoxComponent extends Component {
 	state = {
 		url: `http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=Ossining,us&mode=json`,
@@ -53,24 +51,10 @@ export default class MainBoxComponent extends Component {
 			fetch(this.state.url)
 				.then(res => res.json())
 				.then(data => {
-					console.log(data);
-
 					let weather = data.list;
 					let location = data.city.name;
 					let region = data.city.country;
-					// let weather = data.list.weather;
-					// let location =
-					// 	data.location.name !== ''
-					// 		? data.location.name
-					// 		: this.handleReverseGeoLocate(
-					// 				this.state.lat,
-					// 				this.state.lon
-					// 			);
-					// let region =
-					// 	data.location.region === '' ||
-					// 	data.location.region === data.location.name
-					// 		? data.location.country
-					// 		: data.location.region;
+
 					this.setState(() => ({ weather, location, region }));
 				})
 				.catch(err => console.error(err));
@@ -78,13 +62,10 @@ export default class MainBoxComponent extends Component {
 	};
 
 	passResponse = data => {
-		let weather = data.forecast.forecastday;
-		let location = data.location.name;
-		let region =
-			data.location.region === '' ||
-			data.location.region === data.location.name
-				? data.location.country
-				: data.location.region;
+		let weather = data.list;
+		let location = data.city.name;
+		let region = data.city.country;
+
 		this.setState(() => ({ weather, location, region, error: null }));
 	};
 
@@ -94,12 +75,25 @@ export default class MainBoxComponent extends Component {
 	};
 
 	handleOnSearch = async res => {
-		let response = await fetch(`
-			http://api.apixu.com/v1/forecast.json?days=5&key=${api.key}&q=${encodeURIComponent(
-			res
-		)}`);
+		let response = await fetch(
+			`http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=${res}`
+		);
 		let data = await response.json().catch(err => console.error(err));
+		console.log(this.handleFormatWeatherData(data.list));
 		data.error ? this.failResponse(data) : this.passResponse(data);
+	};
+
+	handleFormatWeatherData = weather => {
+		let fiveDayWeather = [];
+		for (let i = 0; i < weather.length; i += 8) {
+			fiveDayWeather.push(weather[i]);
+		}
+		return fiveDayWeather;
+	};
+
+	handleKelvinToFarenheit = temp => {
+		temp = (temp - 273.15) * 1.8 + 32;
+		return temp.toFixed(0);
 	};
 
 	handleCloseErrorMessage = () => {
@@ -110,30 +104,21 @@ export default class MainBoxComponent extends Component {
 		this.handleGeoLocate();
 	};
 
-	handleFormatWeather = weather => {
-		let fiveDayWeather = [];
-		for (let i = 0; i < weather.length; i += 8) {
-			fiveDayWeather.push(weather[i]);
-		}
-		return fiveDayWeather;
-	};
-
 	render() {
 		const { weather, location, region } = this.state;
-		const current = this.handleFormatWeather(weather);
-		let dailyForecast =
+		const current = this.handleFormatWeatherData(weather);
+		const dailyForecast =
 			Array.isArray(current) && current.length ? (
 				current.map((data, index) => {
-					let icon = `http://openweathermap.org/img/w/${data
+					const icon = `http://openweathermap.org/img/w/${data
 						.weather[0].icon}.png`;
-					let kelToFarenheit = (data.main.temp - 273.15) * 1.8 + 32;
 					return (
 						<WeatherCard
 							key={index}
-							day={this.handleUnixToDayOfWeek(data.dt)}
 							icon={icon}
-							temp={kelToFarenheit.toFixed(0)}
 							description={data.weather[0].description}
+							day={this.handleUnixToDayOfWeek(data.dt)}
+							temp={this.handleKelvinToFarenheit(data.main.temp)}
 						/>
 					);
 				})
