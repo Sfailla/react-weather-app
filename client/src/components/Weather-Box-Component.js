@@ -7,7 +7,7 @@ import ErrorComponent from './ErrorComponent';
 
 export default class MainBoxComponent extends Component {
 	state = {
-		url: `http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=Ossining,us&mode=json`,
+		url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=Ossining,us&mode=json`,
 		weather: [],
 		location: 'Ossining',
 		region: 'NY',
@@ -31,7 +31,7 @@ export default class MainBoxComponent extends Component {
 
 	handleReverseGeoLocate = (lat, lon) => {
 		let key = 'AIzaSyAE3y9x37WZUZrzkhq9rXJF76lrVBpvMqA';
-		let url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
+		let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
 		fetch(url).then(res => res.json()).then(data => {
 			let area = data.results[0].formatted_address;
 			let splitArea = area.split(',');
@@ -42,7 +42,7 @@ export default class MainBoxComponent extends Component {
 	handleGeoLocate = () => {
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState(() => ({
-				url: `http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&lat=${position
+				url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&lat=${position
 					.coords.latitude}&lon=${position.coords.longitude}`,
 				lat: position.coords.latitude,
 				lon: position.coords.longitude
@@ -76,7 +76,7 @@ export default class MainBoxComponent extends Component {
 
 	handleOnSearch = async res => {
 		let response = await fetch(
-			`http://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=${res}`
+			`https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=${res}`
 		);
 		let data = await response.json().catch(err => console.error(err));
 		console.log(this.handleFormatWeatherData(data.list));
@@ -110,7 +110,7 @@ export default class MainBoxComponent extends Component {
 		const dailyForecast =
 			Array.isArray(current) && current.length ? (
 				current.map((data, index) => {
-					const icon = `http://openweathermap.org/img/w/${data
+					const icon = `https://openweathermap.org/img/w/${data
 						.weather[0].icon}.png`;
 					return (
 						<WeatherCard
