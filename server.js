@@ -11,7 +11,6 @@ app.use(cors());
 if (process.env.NODE_ENV === 'production') {
 	//Serving the files on the CLIENT folder
 	app.use(express.static(CLIENT_DIR));
-	app.use(cors());
 	app.use((req, res, next) => {
 		if (req.header('x-forwarded-proto') !== 'https') {
 			res.redirect(`https://${req.header('host')}${req.url}`);
