@@ -1,9 +1,12 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+console.log(path.resolve(__dirname, 'client'));
 
 module.exports = {
 	entry: './client/src/app.js',
 	output: {
-		path: path.resolve(__dirname, 'client'),
+		path: path.resolve(__dirname, './client'),
 		filename: 'bundle.js'
 	},
 	module: {
@@ -24,12 +27,32 @@ module.exports = {
 			},
 			{
 				test: /\.s?css$/,
-				use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+				use: [
+					'style-loader',
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: true
+						}
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true
+						}
+					}
+				]
 			}
 		]
 	},
 	devtool: 'cheap-module-eval-source-map',
 	devServer: {
 		contentBase: path.join(__dirname, 'client')
-	}
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: 'style.css'
+		})
+	]
 };
