@@ -8,8 +8,8 @@
 		"node": "10.15.1"
 	},
 	"scripts": {
-		"dev:start": "concurrently -k \"npm run server\" \"npm run dev\"",
-		"dev-server": "start http://localhost:8080/ & webpack-dev-server --config ./webpack.config.js --mode development",
+		"dev:start": "concurrently -k \"npm run server\" \"npm run dev:server\"",
+		"dev:server": "start http://localhost:8080/ & webpack-dev-server --config ./webpack.config.js --mode development",
 		"server": "node server.js",
 		"build": "webpack -p"
 	},
