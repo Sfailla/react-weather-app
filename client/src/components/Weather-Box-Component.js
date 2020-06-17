@@ -6,7 +6,8 @@ import ErrorComponent from './ErrorComponent';
 
 export default class MainBoxComponent extends Component {
 	state = {
-		url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=Ossining,us&mode=json`,
+		url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${process
+			.env.OPEN_WEATHER_API_KEY}&q=Ossining,us&mode=json`,
 		weather: [],
 		location: 'Ossining',
 		region: 'NY',
