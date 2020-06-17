@@ -76,10 +76,10 @@ export default class MainBoxComponent extends Component {
 
 	handleOnSearch = async res => {
 		let response = await fetch(
-			`https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=${res}`
+			`https://api.openweathermap.org/data/2.5/forecast?APPID=${process
+				.env.OPEN_WEATHER_API_KEY}&q=${res}`
 		);
 		let data = await response.json().catch(err => console.error(err));
-		console.log(this.handleFormatWeatherData(data.list));
 		data.error ? this.failResponse(data) : this.passResponse(data);
 	};
 
