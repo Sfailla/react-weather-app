@@ -40,8 +40,6 @@ export default class MainBoxComponent extends Component {
 	};
 
 	handleGeoLocate = () => {
-		console.log(process.env.GOOGLE_API_KEY);
-		console.log(process.env.WEATHER_API_KEY);
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState(() => ({
 				url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${process
