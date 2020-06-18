@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import api from '../../key/key';
 import WeatherCard from './WeatherCard-Component';
 import InputComponent from './Input-Component';
 import ErrorComponent from './ErrorComponent';
 
 export default class MainBoxComponent extends Component {
 	state = {
-		url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=Ossining,us&mode=json`,
+		url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${process
+			.env.WEATHER_API_KEY}&q=Ossining,us&mode=json`,
 		weather: [],
 		location: 'Ossining',
 		region: 'NY',
@@ -30,8 +30,8 @@ export default class MainBoxComponent extends Component {
 	};
 
 	handleReverseGeoLocate = (lat, lon) => {
-		let key = 'AIzaSyAE3y9x37WZUZrzkhq9rXJF76lrVBpvMqA';
-		let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
+		let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process
+			.env.GOOGLE_API_KEY}`;
 		fetch(url).then(res => res.json()).then(data => {
 			let area = data.results[0].formatted_address;
 			let splitArea = area.split(',');
@@ -42,8 +42,9 @@ export default class MainBoxComponent extends Component {
 	handleGeoLocate = () => {
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState(() => ({
-				url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&lat=${position
-					.coords.latitude}&lon=${position.coords.longitude}`,
+				url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${process
+					.env.WEATHER_API_KEY}&lat=${position.coords
+					.latitude}&lon=${position.coords.longitude}`,
 				lat: position.coords.latitude,
 				lon: position.coords.longitude
 			}));
@@ -76,7 +77,8 @@ export default class MainBoxComponent extends Component {
 
 	handleOnSearch = async res => {
 		let response = await fetch(
-			`https://api.openweathermap.org/data/2.5/forecast?APPID=${api.key}&q=${res}`
+			`https://api.openweathermap.org/data/2.5/forecast?APPID=${process
+				.env.WEATHER_API_KEY}&q=${res}`
 		);
 		let data = await response.json().catch(err => console.error(err));
 		console.log(this.handleFormatWeatherData(data.list));

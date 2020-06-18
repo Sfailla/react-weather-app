@@ -1,5 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 console.log(path.resolve(__dirname, 'client'));
 
@@ -53,6 +55,13 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: 'style.css'
+		}),
+		new Dotenv(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				WEATHER_API_KEY: JSON.stringify(process.env.WEATHER_API_KEY),
+				GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY)
+			}
 		})
 	]
 };
