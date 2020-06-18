@@ -81,7 +81,6 @@ export default class MainBoxComponent extends Component {
 				.env.WEATHER_API_KEY}&q=${res}`
 		);
 		let data = await response.json().catch(err => console.error(err));
-		console.log(this.handleFormatWeatherData(data.list));
 		data.error ? this.failResponse(data) : this.passResponse(data);
 	};
 
