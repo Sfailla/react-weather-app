@@ -2,3 +2,5 @@ node_modules
 
 client/bundle.js
 client/style.css
+
+.env
