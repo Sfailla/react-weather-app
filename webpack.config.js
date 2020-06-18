@@ -3,8 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 
-const vars = `process.env[${Dotenv()}]`;
-console.log(vars);
+console.log(process.env.WEATHER_API_KEY);
+console.log(process.env.GOOGLE_API_KEY);
 
 module.exports = {
 	entry: './client/src/app.js',
