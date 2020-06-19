@@ -1,6 +1,6 @@
 node_modules
 
 client/bundle.js
-client/style.css
+client/styles.css
 
 .env
