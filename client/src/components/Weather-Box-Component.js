@@ -7,7 +7,7 @@ import ErrorComponent from './ErrorComponent';
 export default class MainBoxComponent extends Component {
 	state = {
 		url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${process
-			.env.OPEN_WEATHER_API_KEY}&q=Ossining,us&mode=json`,
+			.env.WEATHER_API_KEY}&q=Ossining,us&mode=json`,
 		weather: [],
 		location: 'Ossining',
 		region: 'NY',
@@ -43,7 +43,7 @@ export default class MainBoxComponent extends Component {
 		navigator.geolocation.getCurrentPosition(position => {
 			this.setState(() => ({
 				url: `https://api.openweathermap.org/data/2.5/forecast?APPID=${process
-					.env.OPEN_WEATHER_API_KEY}&lat=${position.coords
+					.env.WEATHER_API_KEY}&lat=${position.coords
 					.latitude}&lon=${position.coords.longitude}`,
 				lat: position.coords.latitude,
 				lon: position.coords.longitude
@@ -78,7 +78,7 @@ export default class MainBoxComponent extends Component {
 	handleOnSearch = async res => {
 		let response = await fetch(
 			`https://api.openweathermap.org/data/2.5/forecast?APPID=${process
-				.env.OPEN_WEATHER_API_KEY}&q=${res}`
+				.env.WEATHER_API_KEY}&q=${res}`
 		);
 		let data = await response.json().catch(err => console.error(err));
 		data.error ? this.failResponse(data) : this.passResponse(data);
