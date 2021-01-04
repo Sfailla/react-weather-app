@@ -11,6 +11,7 @@
 		"dev:start": "concurrently -k \"npm run server\" \"npm run dev:server\"",
 		"dev:server": "start http://localhost:8080/ & webpack-dev-server --config ./webpack.config.js --mode development",
 		"server": "node server.js",
+		"heroku-prebuild": "npm install && npm run build",
 		"build": "webpack -p"
 	},
 	"dependencies": {
