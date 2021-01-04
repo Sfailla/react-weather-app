@@ -1,6 +1,8 @@
+const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: './client/src/app.js',
@@ -45,7 +47,7 @@ module.exports = {
       },
     ],
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: isDevelopment ? 'cheap-module-eval-source-map' : 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'client'),
   },
@@ -58,6 +60,7 @@ module.exports = {
       'process.env': {
         GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY),
         WEATHER_API_KEY: JSON.stringify(process.env.WEATHER_API_KEY),
+        NODE_ENV: JSON.stringify('production'),
       },
     }),
   ],
