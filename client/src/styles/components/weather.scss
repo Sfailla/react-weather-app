@@ -1,0 +1,35 @@
+.weather {
+  max-width: 115rem;
+  min-height: 55rem;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 1rem;
+  border: 2px solid $color-neon-yellow;
+  background: {
+    image: url('/../../../img/weather-bg-code-new.png');
+    repeat: no-repeat;
+    size: cover;
+  }
+  transition: height 1s ease-in-out;
+
+  &__container {
+    padding: 3rem 2rem 8rem 2rem;
+
+    @media (min-width: 62.5625em) {
+      @include flex-center(space-between, center);
+    }
+  }
+
+  &__loading {
+    color: $color-neon-yellow;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__location {
+    padding: 4rem 0 2rem 0;
+    text-align: center;
+    color: $color-neon-yellow;
+    font-size: 3.5rem;
+  }
+}
