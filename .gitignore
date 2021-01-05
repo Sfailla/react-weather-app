@@ -1,6 +1,5 @@
 node_modules
 
-client/bundle.js
-client/styles.css
-
 .env
+
+dist
