@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from './Icon';
 
 export default class Search extends React.Component {
   state = {
@@ -45,9 +46,12 @@ export default class Search extends React.Component {
                 autoComplete="off"
               />
               <button type="submit" className="input__submit-button">
-                <svg className="input__search-icon">
-                  <use xlinkHref="./img/svg/sprite.svg#icon-magnifying-glass" />
-                </svg>
+                <Icon
+                  icon="search"
+                  viewBox={20}
+                  fill="#ffa500"
+                  className="input__search-icon"
+                />
               </button>
             </form>
           </div>

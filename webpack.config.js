@@ -2,12 +2,23 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const isDevelopment = process.env.NODE_ENV === 'development';
+
+const imagemin = require('imagemin');
+const imageminWebp = require('imagemin-webp');
+
+(async () => {
+  await imagemin(['./client/src/img/*.{jpg,png}'], {
+    destination: './assets/webp',
+    plugins: [imageminWebp({ quality: 50 })],
+  });
+})();
 
 module.exports = {
   entry: './client/src/app.js',
   output: {
-    path: path.resolve(__dirname, './client'),
+    path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
   module: {
@@ -45,6 +56,36 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(gif|png|jpe?g|svg|webp)$/i,
+        include: [path.resolve(__dirname, './assets')],
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   devtool: isDevelopment ? 'cheap-module-eval-source-map' : 'source-map',
@@ -62,6 +103,9 @@ module.exports = {
         WEATHER_API_KEY: JSON.stringify(process.env.WEATHER_API_KEY),
         NODE_ENV: JSON.stringify('production'),
       },
+    }),
+    new HtmlWebpackPlugin({
+      template: 'client/index.html',
     }),
   ],
 };

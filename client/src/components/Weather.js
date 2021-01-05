@@ -3,6 +3,7 @@ import React from 'react';
 import WeatherCard from './WeatherCard';
 import Search from './Search';
 import Error from './Error';
+import backgroundImg from '../../../assets/webp/weather-bg-code-new.webp';
 
 export default class Weather extends React.Component {
   state = {
@@ -127,7 +128,7 @@ export default class Weather extends React.Component {
 
     return (
       <div>
-        <div className="weather">
+        <div className="weather" style={{ background: `url(${backgroundImg})` }}>
           <h1 className="weather__location">
             {location} {region}
           </h1>

@@ -5,11 +5,8 @@
   margin: 0 auto;
   border-radius: 1rem;
   border: 2px solid $color-neon-yellow;
-  background: {
-    image: url('/../../../img/weather-bg-code-new.png');
-    repeat: no-repeat;
-    size: cover;
-  }
+  background-repeat: no-repeat;
+  background-size: cover;
   transition: height 1s ease-in-out;
 
   &__container {
